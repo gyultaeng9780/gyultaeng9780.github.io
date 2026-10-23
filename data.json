@@ -1,0 +1,73 @@
+{
+ "img": {
+  "banner": "images/7099cc14865cc43763e56964b0878a43.webp",
+  "hero": "images/ae7b63738a14e9d8c88aec0d1dee7def.webp",
+  "cat": "images/9af789d8b027fc22cfd3b53438c7cf98.webp",
+  "album": "images/13cfbab6c6e032095e89b41b21dccc35.webp"
+ },
+ "name": "귤탱",
+ "handle": "@UuuuUuuu9090",
+ "links": {
+  "postype": "https://www.postype.com/@todrbfxodrbf?utm_source=link&utm_medium=social&utm_content=if_sh_wl&utm_campaign=channel",
+  "crepe": "https://kre.pe/R1ab"
+ },
+ "sns": {
+  "bsky": "https://bsky.app/profile/uuuuuuuu9090.bsky.social",
+  "x": "https://x.com/UuuuUuuu9090"
+ },
+ "iconOrder": [
+  "x",
+  "crepe",
+  "postype",
+  "bsky"
+ ],
+ "cards": [
+  "images/1a95348957661184b34f6f02264029df.webp",
+  "images/bad39bd732346c6c8bf2ff6952a81b05.webp",
+  "images/1b34570c954fc401308b243e769cee2a.webp",
+  "images/4e83cbc44e5177204a9b66603f4339fc.webp",
+  "images/6201e726b0a38c7ac54159c294186001.webp",
+  "images/baacb454cf5cad1f7421a4be8f623282.webp",
+  "images/722d158f6ded73e81903adafc881a99c.webp"
+ ],
+ "memo": "바쁨...가끔...게임...",
+ "intro": "그림그림\n---\n",
+ "text": {},
+ "tags": [
+  "1차위주",
+  "2차 가끔",
+  "그림",
+  "성인"
+ ],
+ "music": {
+  "title": " ᐳone",
+  "artist": "ericdoa",
+  "url": "https://youtu.be/MHxJXBLJW98?si=FkVNFuD0940gJRMB"
+ },
+ "games": [
+  {
+   "src": "images/416017d79b54c087de81ac46db5f81b9.webp",
+   "name": "VALORANT"
+  },
+  {
+   "src": "images/701dc46b85b6b6c09e8bf11c3366bb03.webp",
+   "name": "CYPHERS"
+  },
+  {
+   "src": "images/2ddad280a13ebdded547eb7c46dcbdde.webp",
+   "name": "MONSTER HUNTER "
+  },
+  {
+   "src": "images/a3858fce41dab37abe02e1a7cc87f102.webp",
+   "name": "명일방주"
+  },
+  {
+   "src": "images/85e198c7555a3d3510954e6f2cb23f7c.webp",
+   "name": "명일방주\n엔드필드"
+  },
+  {
+   "src": "images/49293a4f5ffefff4741858eb3e7d0b4f.webp",
+   "name": "망각전야"
+  }
+ ]
+}

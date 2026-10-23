@@ -30,7 +30,7 @@
   "images/baacb454cf5cad1f7421a4be8f623282.webp",
   "images/722d158f6ded73e81903adafc881a99c.webp"
  ],
- "memo": "바쁨...가끔...게임...",
+ "memo": "바쁩니다,,ㅠㅠ",
  "intro": "그림그림\n---\n",
  "text": {},
  "tags": [
@@ -69,5 +69,10 @@
    "src": "images/49293a4f5ffefff4741858eb3e7d0b4f.webp",
    "name": "망각전야"
   }
- ]
+ ],
+ "credits": {
+  "images/1a95348957661184b34f6f02264029df.webp": "@LAZA_CS님 CM",
+  "images/bad39bd732346c6c8bf2ff6952a81b05.webp": "@76HZ_님 CM",
+  "images/1b34570c954fc401308b243e769cee2a.webp": "@_Ham님 CM"
+ }
 }

@@ -63,6 +63,11 @@ body.editing .slot .pick{position:absolute;inset:0;display:flex;align-items:cent
 
 .pc-pic{position:relative;width:100%;aspect-ratio:3/2;border-radius:2px;overflow:hidden;background:#fff1c4}
 .pc-pic img{display:block;width:100%;height:100%;object-fit:cover}
+.pc-credit{margin:0 0 -5px;padding:5px 1px 0;font-size:9.5px;line-height:1.15;color:rgba(75,51,38,.55);text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-credit a{color:inherit;text-decoration:none}
+.pc-credit-in{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.pc-credit-in input{flex:1;min-width:0;height:26px;padding:0 8px;border:1px solid var(--grid);border-radius:6px;font:inherit;font-size:12px;color:var(--ink);background:#fff}
+.pc-thumbs figure{cursor:pointer}.pc-thumbs figure.on{outline:2px solid var(--orange-ink);outline-offset:1px}
 .pc-pic::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;pointer-events:none;box-shadow:inset 0 2px 5px rgba(80,50,20,.28),inset 0 0 0 1px rgba(80,50,20,.08)}
 .pc-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;line-height:1;font-family:var(--font-display);font-size:15px;letter-spacing:.14em;color:var(--orange-ink);opacity:.55}
 .pc-edit{display:flex;flex-direction:column;gap:8px;padding:10px}
@@ -324,8 +329,10 @@ body.editing [data-t]:focus{outline-style:solid;background:rgba(255,255,255,.5)}
             <div class="slot hero cover" data-slot="hero"></div>
       <div class="postcard" id="postcard">
         <div class="pc-pic"><img id="pcImg" alt="" hidden=""><div class="pc-empty" id="pcEmpty" data-t="pc_empty">POSTCARD</div></div>
+        <p class="pc-credit" id="pcCredit" hidden=""></p>
         <div class="pc-edit" id="pcEdit" hidden="">
           <div class="pc-thumbs" id="pcThumbs"></div>
+          <label class="pc-credit-in" for="inCredit">출처<input id="inCredit" type="text" maxlength="80" placeholder="보이는 그림의 출처 (링크도 돼요)"></label>
           <button type="button" id="pcAdd">+ 그림 추가</button>
           <p class="pc-hint">열 때마다 이 중 한 장이 무작위로 보여요.</p>
         </div>
@@ -470,6 +477,7 @@ body.editing [data-t]:focus{outline-style:solid;background:rgba(255,255,255,.5)}
   state.music = state.music || {title:'노래 제목', artist:'가수 이름', url:''};
   state.games = Array.isArray(state.games) ? state.games.slice(0,6) : [];
   state.cards = Array.isArray(state.cards) ? state.cards : [];
+  state.credits = (state.credits && typeof state.credits==='object') ? state.credits : {};
   let cardIdx = Math.floor(Math.random()*1e6);
   if(state.memo == null) state.memo = '커미션 공지나 알림을 여기에 적어 주세요.';
   if(state.intro == null) state.intro = 'X : @UuuuUuuu9090\n---\n**여기에 소개글을 적어 주세요.**\n- 목록은 이렇게\n- 줄 앞에 - 를 붙여요';
@@ -551,12 +559,17 @@ body.editing [data-t]:focus{outline-style:solid;background:rgba(255,255,255,.5)}
     const img = $('#pcImg'), n = state.cards.length;
     if(n){ img.src = srcOf(state.cards[cardIdx % n]); img.hidden = false; $('#pcEmpty').hidden = true; }
     else { img.hidden = true; img.removeAttribute('src'); $('#pcEmpty').hidden = false; }
+    const cur = n ? state.cards[cardIdx % n] : null, cr = (cur && state.credits[cur]) || '', cel = $('#pcCredit');
+    cel.textContent = ''; cel.hidden = !cr;
+    if(cr){ if(/^https?:\/\//.test(cr)){ const a=document.createElement('a'); a.href=cr; a.target='_blank'; a.rel='noopener'; a.textContent=cr.replace(/^https?:\/\/(www\.)?/,''); cel.append('출처 · ', a); } else cel.textContent = '출처 · ' + cr; }
+    const ci = $('#inCredit'); if(ci){ if(document.activeElement!==ci) ci.value = cr; ci.disabled = !cur; }
     const box = $('#pcThumbs'); box.innerHTML = '';
     state.cards.forEach((u,i)=>{
-      const f = document.createElement('figure');
+      const f = document.createElement('figure'); if(n && i===cardIdx % n) f.className='on';
+      f.addEventListener('click', ()=>{ cardIdx = i; renderCard(); });
       const im = document.createElement('img'); im.src = srcOf(u); im.alt = '';
       const b = document.createElement('button'); b.type = 'button'; b.textContent = '×'; b.setAttribute('aria-label', (i+1)+'번째 엽서 그림 빼기');
-      b.addEventListener('click', ev=>{ ev.stopPropagation(); state.cards.splice(i,1); dirty = true; renderCard(); });
+      b.addEventListener('click', ev=>{ ev.stopPropagation(); delete state.credits[state.cards[i]]; state.cards.splice(i,1); dirty = true; renderCard(); });
       f.append(im,b); box.appendChild(f);
     });
   }
@@ -802,6 +815,7 @@ body.editing [data-t]:focus{outline-style:solid;background:rgba(255,255,255,.5)}
   document.addEventListener('click', e=>{
     if(editing && e.target.closest('a') && !e.target.closest('.slot')) e.preventDefault();
   }, true);
+  $('#inCredit').addEventListener('input', e=>{ const n=state.cards.length; if(!n) return; const u=state.cards[cardIdx % n], v=e.target.value.trim(); if(v) state.credits[u]=v; else delete state.credits[u]; dirty = true; renderCard(); });
   $('#inTags').addEventListener('input', e=>{ state.tags = e.target.value.split(',').map(t=>t.trim()).filter(Boolean).slice(0,8); dirty = true; renderTags(); });
   [['#inNpTitle','title'],['#inNpArtist','artist'],['#inNpUrl','url']].forEach(([sel,k])=>{
     $(sel).addEventListener('input', e=>{ state.music[k] = k==='url' ? e.target.value.trim() : e.target.value; dirty = true; renderMusic(); });
@@ -819,6 +833,7 @@ body.editing [data-t]:focus{outline-style:solid;background:rgba(255,255,255,.5)}
     if(d && typeof d==='object' && !editing){ Object.assign(state, d); state.games = (state.games||[]).slice(0,6); renderProfile(); render(); }
   }).catch(()=>{}).finally(done);
   if(GH && (token || /edit/.test(location.hash + location.search))) $('#bar').hidden = false;
+  window.addEventListener('hashchange', ()=>{ if(GH && /edit/.test(location.hash)) $('#bar').hidden = false; });
 })();
 </script>
 <!--page-end--></body></html>

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&amp;family=Gothic+A1:wght@400;600;700;800&amp;family=IBM+Plex+Sans+KR:wght@600&amp;display=swap">
 <style>
 /* 레이아웃: 책상 위 작업 폴더 — 탭 달린 폴더 / 테이프 붙인 대표 그림 / 링으로 묶인 두 장의 모눈 노트 (왼쪽 작가증, 오른쪽 정보) / 스티커 */
-@font-face{font-family:"SBAggro";src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff") format("woff");font-weight:100 400;font-display:swap}@font-face{font-family:"SBAggro";src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff") format("woff");font-weight:500 900;font-display:swap}
+@font-face{font-family:"LINESeed";src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2") format("woff2");font-weight:100 400;font-display:swap}@font-face{font-family:"LINESeed";src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2") format("woff2");font-weight:500 900;font-display:swap}
 :root{
   --desk:#ffffff;
   --folder:#ffeaa6;
@@ -22,7 +22,7 @@
   --blue:#7f9be0;
   --ring:#c9c6c0;
   --font-display:"Jua","Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --font-body:"SBAggro","Gothic A1","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --font-body:"LINESeed","Gothic A1","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --line:2px solid var(--edge);
   --sp:20px;   /* 큰 간격: 폴더·노트·카드 안팎 */
   --sp-s:10px; /* 작은 간격: 제목과 내용, 칸과 칸 사이 */
@@ -151,7 +151,7 @@ h1{margin:0;font-family:var(--font-display);font-weight:400;font-size:36px;line-
 .pcard .body{padding:var(--sp);display:flex;flex-direction:column;gap:var(--sp-s)}
 .photo{width:120px;height:120px;margin:0 auto;border-radius:12px;background:var(--paper);box-shadow:0 2px 8px rgba(150,105,50,.14)}
 .pcard .who{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
-.pcard .pname{font-family:"SBAggro",var(--font-body);font-weight:500;font-size:22px;line-height:1.25;word-break:break-all}
+.pcard .pname{font-family:"LINESeed",var(--font-body);font-weight:700;color:rgba(75,51,38,.8);font-size:22px;line-height:1.25;word-break:break-all}
 .pcard .phandle{font-size:12px;color:var(--muted);word-break:break-all}
 .pcard .plabel{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:15px;line-height:1;color:var(--orange-ink);padding-top:var(--sp-s);border-top:2px dashed var(--grid)}
 .pcard .intro{padding-top:var(--sp-s);border-top:2px dashed var(--grid)}
